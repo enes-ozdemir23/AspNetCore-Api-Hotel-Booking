@@ -1,19 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using HotelProject.WebUI.Dtos.ServiceDto;
+using HotelProject.WebUI.Dtos.BookingDto;
 using HotelProject.WebUI.Dtos.SubscribeDto;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace HotelProject.WebUI.Controllers
 {
-    public class DefaultController : Controller
+    public class BookingController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public DefaultController(IHttpClientFactory httpClientFactory)
+        public BookingController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
@@ -23,21 +22,22 @@ namespace HotelProject.WebUI.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult _SubscribePartial()
+        public PartialViewResult AddBooking()
         {
             return PartialView();
         }
 
         [HttpPost]
-        public async Task<IActionResult> _SubscribePartial(CreateSubscribeDto createSubscribeDto)
+        public async Task<IActionResult> AddBooking(CreateBookingDto createBookingDto)
         {
+            createBookingDto.Status = "Onay Bekliyor";
             var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(createSubscribeDto);
+            var jsonData = JsonConvert.SerializeObject(createBookingDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("http://localhost:25024/api/Subscribe", stringContent);
+            var responseMessage = await client.PostAsync("http://localhost:25024/api/Booking", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index","Default");
+                return RedirectToAction("Index", "Default");
             }
             return View();
         }

@@ -7,7 +7,7 @@
 <html lang="en">
 
 @await Component.InvokeAsync("_HeadPartial")
-
+ 
 
 <body>
     <div class="container-fluid bg-white p-0">
@@ -32,7 +32,7 @@
 
         @await Component.InvokeAsync("_TeamPartial")
 
-        @await Component.InvokeAsync("_SubscribePartial")
+        @await Html.PartialAsync("_SubscribePartial")
 
         @await Component.InvokeAsync("_FooterPartial")
 

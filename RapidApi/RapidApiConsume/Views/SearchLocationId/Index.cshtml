@@ -1,0 +1,40 @@
+﻿@model List<BookingApiLocationSearchViewModel.Hotel>
+@{
+    Layout = null;
+    int count=0;
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<title>Rapid Api</title>
+<div class="container">
+    <br />
+    <br />
+    @using (Html.BeginForm("Index", "SearchLocationId", FormMethod.Post))
+    {
+        <label>Şehir Adını Giriniz</label>
+        <input type="text" class="form-control" name="cityName"/>
+        <br />
+        <button class="btn btn-primary">Şehir için id bul</button>
+    }
+    <table class="table table-bordered">
+        <tr>
+            <th>#</th>
+            <th>Otel Adı</th>
+            <th>Otel Puanı</th>
+            <th>dest_id</th>
+
+        </tr>
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@item.property.name</td>
+                <td>@item.property.reviewScore</td>
+                <td>@item.property.ufi</td>
+            </tr>
+        }
+    </table>
+    <br />
+    <a href="///" class="btn btn-success">Yeni Otel Rezervasyon Bilgisi</a>
+</div>

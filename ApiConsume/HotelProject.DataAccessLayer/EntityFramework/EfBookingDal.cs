@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 using HotelProject.DataAccessLayer.Abstract;
 using HotelProject.DataAccessLayer.Concrete;
 using HotelProject.DataAccessLayer.Repositories;
@@ -16,6 +17,21 @@ namespace HotelProject.DataAccessLayer.EntityFramework
         {
 
         }
-    
+
+        public void BookingStatusChangeApproved(int id)
+        {
+            using var context = new Context();
+            var values = context.Bookings.Find(id);
+            values.Status = "Onaylandı";
+            context.SaveChanges();
+        }
+
+        public void BookingStatusChangeCancelled(int id)
+        {
+            using var context = new Context();
+            var values = context.Bookings.Find(id);
+            values.Status = "İptal Edildi";
+            context.SaveChanges();
+        }
     }
 }

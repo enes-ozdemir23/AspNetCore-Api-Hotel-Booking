@@ -25,5 +25,13 @@ namespace HotelProjectWebApi.Controllers
             return Ok();
         }
 
+
+        [HttpGet]
+        public IActionResult InboxContactList()
+        {
+            var values = _contactService.TGetList();
+            return Ok(values);
+        }
+
     }
 }

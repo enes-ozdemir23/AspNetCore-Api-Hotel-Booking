@@ -34,6 +34,20 @@ namespace HotelProject.WebUI.Controllers
             return View();
         }
 
+        public async Task<IActionResult> SendBox()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("http://localhost:25024/api/SendMessage");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultSendBoxDto>>(jsonData);
+                return View(values);
+            }
+
+            return View();
+        }
+
         [HttpGet]
         public IActionResult AddSendMessage()
         {
@@ -66,6 +80,31 @@ namespace HotelProject.WebUI.Controllers
         {
             return PartialView();
 
+        }
+
+        public async Task< IActionResult > MessageDetailsBySendBox(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync($"http://localhost:25024/api/SendMessage/{id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var JsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<GetMessageByIDDto>(JsonData);
+                return View(values);
+            }
+            return View();
+        }
+        public async Task<IActionResult> MessageDetailsByInbox(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync($"http://localhost:25024/api/Contact/{id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var JsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<InboxContactDto>(JsonData);
+                return View(values);
+            }
+            return View();
         }
     }
 }

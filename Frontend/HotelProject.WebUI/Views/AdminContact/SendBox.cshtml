@@ -1,8 +1,10 @@
-﻿@model List<InboxContactDto>
+﻿@model List<ResultSendBoxDto>
+
 @{
-	ViewData["Title"] = "Index";
-	Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+    ViewData["Title"] = "SendBox";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
 }
+
 
 <div class="email-left-box">
 	<a href="/AdminContact/AddSendMessage/" class="btn btn-primary btn-block">Yeni Mesaj</a>
@@ -14,7 +16,7 @@
 	<div role="toolbar" class="toolbar">
 		<div class="btn-group">
 			<button aria-expanded="false" data-toggle="dropdown" class="btn btn-dark dropdown-toggle" type="button">
-				Gelen Mesajlar <span class="caret m-l-5"></span>
+				Gönderilen Mesajlar <span class="caret m-l-5"></span>
 			</button>
 		</div>
 	</div>
@@ -23,7 +25,7 @@
 		{
 
 			<div class="message">
-				<a href="/AdminContact/MessageDetailsByInbox/@item.ContactID">
+				<a href="/AdminContact/MessageDetailsBySendBox/@item.SendMessageID">
 					<div class="col-mail col-mail-1">
 						<div class="email-checkbox">
 							<input type="checkbox" id="chk2">
@@ -31,8 +33,8 @@
 						</div><span class="star-toggle ti-star"></span>
 					</div>
 					<div class="col-mail col-mail-2">
-						<div class="subject">@item.Message.Substring(0, 30)</div>
-						<div class="date">11:49</div>
+						<div class="subject"><b>Konu: @item.Title</b> Alıcı:@item.ReceiverName</div>
+						<div class="date">@(((DateTime)item.Date).ToString("dd-MMM-yyyy"))</div>
 					</div>
 				</a>
 			</div>
@@ -40,4 +42,6 @@
 		}
 	</div>
 </div>
+
+
 

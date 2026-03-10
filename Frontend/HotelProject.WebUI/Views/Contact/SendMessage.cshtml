@@ -8,7 +8,7 @@
 		<div class="row g-4">
 			<div class="col-12">
 				<div class="row gy-4">
-					<div class="col-md-4">
+					<div class="col-md-4"> 
 						<h6 class="section-title text-start text-primary text-uppercase">Rezervasyon</h6>
 						<p><i class="fa fa-envelope-open text-primary me-2"></i>hotelapi@example.com</p>
 					</div>
@@ -43,8 +43,13 @@
 							</div>
 							<div class="col-12">
 								<div class="form-floating">
-									<input type="text" class="form-control" id="subject" placeholder="Konu" name="Subject">
-									<label for="subject">Konu</label>
+									@Html.DropDownListFor(x=>x.MessageCategoryID,(List<SelectListItem>)ViewBag.v,new{@class="form-control"})
+									<label for="subject">Konuyu Seçin</label>
+								</div>
+								<br />
+								<div class="form-floating">
+									<input type="text" class="form-control" id="subject" placeholder="Konu Başlığı" name="Subject">
+									<label for="subject">Konu Başlığı</label>
 								</div>
 							</div>
 							<div class="col-12">

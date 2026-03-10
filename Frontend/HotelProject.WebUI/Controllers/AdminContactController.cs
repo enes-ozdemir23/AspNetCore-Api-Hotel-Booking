@@ -8,6 +8,7 @@ using HotelProject.WebUI.Dtos.ContactDto;
 using System.Text;
 using HotelProject.WebUI.Dtos.SendMessageDto;
 using System;
+using System.Linq;
 
 namespace HotelProject.WebUI.Controllers
 {
@@ -24,10 +25,25 @@ namespace HotelProject.WebUI.Controllers
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("http://localhost:25024/api/Contact");
+
+            var client2 = _httpClientFactory.CreateClient();
+            var responseMessage2 = await client2.GetAsync("http://localhost:25024/api/Contact/GetContactCount");
+
+            var client3 = _httpClientFactory.CreateClient();
+            var responseMessage3 = await client3.GetAsync("http://localhost:25024/api/SendMessage/GetSendMessageCount");
+
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<InboxContactDto>>(jsonData);
+
+                var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
+                ViewBag.contactCount = jsonData2;
+
+                var jsonData3 = await responseMessage3.Content.ReadAsStringAsync();
+                ViewBag.messageCount = jsonData3;
+
+
                 return View(values);
             }
 
@@ -44,6 +60,8 @@ namespace HotelProject.WebUI.Controllers
                 var values = JsonConvert.DeserializeObject<List<ResultSendBoxDto>>(jsonData);
                 return View(values);
             }
+
+
 
             return View();
         }
@@ -71,8 +89,10 @@ namespace HotelProject.WebUI.Controllers
 
         }
 
-        public PartialViewResult _SideBarAdminContactPartial()
-        {
+        public async Task<PartialViewResult> _SideBarAdminContactPartial()
+        {      
+     
+
             return PartialView();
         }
 
@@ -106,5 +126,7 @@ namespace HotelProject.WebUI.Controllers
             }
             return View();
         }
+
+
     }
 }

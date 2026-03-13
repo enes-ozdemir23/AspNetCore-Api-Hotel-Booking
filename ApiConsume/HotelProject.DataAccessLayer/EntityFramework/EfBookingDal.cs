@@ -33,5 +33,12 @@ namespace HotelProject.DataAccessLayer.EntityFramework
             values.Status = "İptal Edildi";
             context.SaveChanges();
         }
+
+        public int GetBookingCount()
+        {
+            using var context= new Context();
+            var values = context.Bookings.Count();
+            return values;
+        }
     }
 }

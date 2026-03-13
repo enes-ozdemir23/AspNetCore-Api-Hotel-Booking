@@ -49,5 +49,18 @@ namespace HotelProjectWebApi.Controllers
             var value = _roomService.TRoomCount();
             return Ok(value);
         }
+
+        [HttpGet("Last4Staff")]
+        public IActionResult Last4Staff()
+        {
+            var value = _staffService.TLast4Staff();
+            return Ok(value);
+        } 
+        [HttpGet("Last6Bookings")]
+        public IActionResult Last6Bookings()
+        {
+            var value = _bookingService.TLast6BookingList();
+            return Ok(value);
+        }
     }
 }

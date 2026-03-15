@@ -17,8 +17,5 @@ namespace HotelProject.EntityLayer.Concrete
         public int WorkLocationID { get; set; }
         public WorkLocation WorkLocation { get; set; }
 
-
-
-
     }
 }

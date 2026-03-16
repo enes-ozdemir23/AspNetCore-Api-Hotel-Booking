@@ -64,5 +64,12 @@ namespace HotelProjectWebApi.Controllers
             _bookingService.TBookingStatusChangeCancelled(id);
             return Ok("Rezervasyon Durumu Değiştirildi");
         }
+
+        [HttpGet("BookingStatusChangeWait/{id}")]
+        public IActionResult BookingStatusChangeWait(int id)
+        {
+            _bookingService.TBookingStatusChangeWait(id);
+            return Ok("Rezervasyon Durumu Değiştirildi");
+        }
     }
 }

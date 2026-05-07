@@ -49,7 +49,7 @@
 
 ```bash
 # 1. Repoyu klonla
-git clone https://github.com/enesozdemir23/AspNetCoreApi.git
+git clone https://github.com/enes-ozdemir23/AspNetCoreApi.git
 
 # 2. appsettings.json bağlantı dizesini ve JWT ayarlarını düzenle
 "ConnectionStrings": {
